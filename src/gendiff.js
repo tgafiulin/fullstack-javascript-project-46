@@ -8,7 +8,8 @@ export default (path1, path2) => {
 
   const result = [];
 
-  const keys1 = _.sortedUniq(Object.keys(file1));
+  const keys1 = _.sortBy(Object.keys(file1));
+  console.log(keys1);
 
   for (let i = 0; i < keys1.length; i += 1) {
     const key1 = keys1[i];
@@ -22,7 +23,7 @@ export default (path1, path2) => {
     }
   }
 
-  const keys2 = _.sortedUniq(Object.keys(file2));
+  const keys2 = _.sortBy(Object.keys(file2));
 
   for (let i = 0; i < keys2.length; i += 1) {
     const key2 = keys2[i];
