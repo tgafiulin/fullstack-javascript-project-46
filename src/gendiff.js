@@ -1,15 +1,24 @@
 import fs from 'fs';
 import path from 'path';
+import yaml from 'js-yaml';
 import _ from 'lodash';
 
-export default (path1, path2) => {
-  const file1 = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), path1)));
-  const file2 = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), path2)));
+export default (fileName1, fileName2) => {
+  const path1 = path.resolve(process.cwd(), fileName1);
+  const path2 = path.resolve(process.cwd(), fileName2);
+  let file1; let
+    file2;
+  if (path.extname(path1) === 'json') {
+    file1 = JSON.parse(fs.readFileSync(path1));
+    file2 = JSON.parse(fs.readFileSync(path2));
+  } else {
+    file1 = yaml.load(fs.readFileSync(path1));
+    file2 = yaml.load(fs.readFileSync(path2));
+  }
 
   const result = [];
 
   const keys1 = _.sortBy(Object.keys(file1));
-  console.log(keys1);
 
   for (let i = 0; i < keys1.length; i += 1) {
     const key1 = keys1[i];
